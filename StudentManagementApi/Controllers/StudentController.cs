@@ -140,6 +140,7 @@ namespace StudentManagementApi.Controllers
 
         [HttpGet]
         [Route("GetStudentFromHeader")]
+        //https://localhost:7083/api/students/GetStudentFromHeader
         public IActionResult GetStudentFromHeader(
             [FromHeader(Name = "Name")] string name,
             [FromHeader(Name = "Course")] string course)
