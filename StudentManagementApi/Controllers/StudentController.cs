@@ -85,7 +85,8 @@
 //    }
 //}
 
-
+using StudentManagementApi.DTOs;
+using StudentManagementApi.Mappings;
 
 using Microsoft.AspNetCore.Mvc;
 using StudentManagementApi.Models;
@@ -111,7 +112,8 @@ namespace StudentManagementApi.Controllers
         //https://localhost:7083/api/students/GetAllStudents
         public IActionResult GetAllStudents()
         {
-            return Ok(_studentService.GetAllStudents());
+            var students = _studentService.GetAllStudents();
+            return Ok(students.ToResponseDto());
         }
 
         [HttpGet]
@@ -153,8 +155,12 @@ namespace StudentManagementApi.Controllers
 
         [HttpPost]
         [Route("AddStudentFromBody")]
-        public IActionResult AddStudentFromBody([FromBody] Student student)
+        public IActionResult AddStudentFromBody([FromBody] CreateStudentDto dto)
         {
+
+            var student = dto.ToStudent();
+
+            //_studentService.AddStudent(student);
             _studentService.AddStudent(student);
 
             return Ok("Student added using FromBody");
@@ -281,8 +287,8 @@ namespace StudentManagementApi.Controllers
         [Route("UpdateStudentFromHeader/{id:int}")]
         public IActionResult UpdateStudentFromHeader(
             [FromRoute] int id,
-            [FromHeader(Name = "X-User-Name")] string name,
-            [FromHeader(Name = "X-User-Course")] string course,
+            [FromHeader(Name = "Name")] string name,
+            [FromHeader(Name = "Course")] string course,
             [FromQuery] int age)
         {
             var existingStudent = _studentService.GetStudentById(id);

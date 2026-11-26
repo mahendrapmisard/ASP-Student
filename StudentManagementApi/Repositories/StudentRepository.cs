@@ -9,7 +9,7 @@ namespace StudentManagementApi.Repositories
         {
             new Student { Id = 1, Name = "Mahendra", Age = 24, Course = "CSharp" },
             new Student { Id = 2, Name = "Madan", Age = 25, Course = "SQL" },
-            new Student { Id = 3, Name = "Kavya", Age = 23, Course = "Angular" }
+            new Student { Id = 3, Name = "Giri", Age = 23, Course = "Angular" }
         };
 
         public List<Student> GetAll()
